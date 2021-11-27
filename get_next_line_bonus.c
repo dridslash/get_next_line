@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mnaqqad <mnaqqad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/27 12:46:48 by mnaqqad           #+#    #+#             */
-/*   Updated: 2021/11/27 14:34:28 by mnaqqad          ###   ########.fr       */
+/*   Created: 2021/11/27 14:33:05 by mnaqqad           #+#    #+#             */
+/*   Updated: 2021/11/27 15:27:23 by mnaqqad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ static void	ft_next(char **buffer, char **sline, char **saver, int fd)
 
 char	*get_next_line(int fd)
 {
-	static char	*saver;
+	static char	*saver[1024];
 	char		*buffer;
 	char		*sline;
 
@@ -79,18 +79,8 @@ char	*get_next_line(int fd)
 		buffer = NULL;
 		return (NULL);
 	}
-	if (!saver)
-		saver = ft_strdup("");
-	ft_next(&buffer, &sline, &saver, fd);
+	if (!saver[fd])
+		saver[fd] = ft_strdup("");
+	ft_next(&buffer, &sline, &saver[fd], fd);
 	return (sline);
 }
-
-// int main (void)
-// {
-
-//      int fd = open("TEST",O_RDONLY);
-//      for(int i=0 ; i < 8;i++)
-//      printf("%s\n",get_next_line(fd));
-
-//      return 0;
-// }

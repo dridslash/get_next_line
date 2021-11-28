@@ -6,7 +6,7 @@
 /*   By: mnaqqad <mnaqqad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/27 12:46:48 by mnaqqad           #+#    #+#             */
-/*   Updated: 2021/11/27 14:34:28 by mnaqqad          ###   ########.fr       */
+/*   Updated: 2021/11/28 10:46:29 by mnaqqad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,17 @@ static void	ft_next(char **buffer, char **sline, char **saver, int fd)
 	while (holder && ft_strchr((*saver), '\n') == -1)
 	{
 		holder = read(fd, (*buffer), BUFFER_SIZE);
+		printf("in while :%zd\n",holder);
 		(*buffer)[holder] = '\0';
+		printf(" in while before strjoin:%s\n",(*saver));
 		(*saver) = ft_strjoin((*saver), (*buffer));
+		printf(" in while after strjoin:%s\n",(*saver));
 	}
+	printf("\n-----------------------------\n");
+	printf("outside :%zd\n",holder);
+	printf("outside :%s\n",(*saver));
+	printf("\n-----------------------------\n");
+	
 	free(*buffer);
 	if (holder == 0)
 	{
@@ -57,8 +65,8 @@ static void	ft_next(char **buffer, char **sline, char **saver, int fd)
 		tmp = (*saver);
 		(*saver) = ft_strdup((*saver) + ft_strchr((*saver), '\n') + 1);
 		free(tmp);
-	}
-	if (!(*(*sline)))
+	 }
+	if (!(**sline))
 		ft_free(saver, sline);
 }
 
@@ -85,12 +93,12 @@ char	*get_next_line(int fd)
 	return (sline);
 }
 
-// int main (void)
-// {
+int main (void)
+{
 
-//      int fd = open("TEST",O_RDONLY);
-//      for(int i=0 ; i < 8;i++)
-//      printf("%s\n",get_next_line(fd));
+     int fd = open("TEST",O_RDONLY);
+      for(int i=0 ; i < 6;i++)
+	  get_next_line(fd);
 
-//      return 0;
-// }
+     return 0;
+}

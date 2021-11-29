@@ -6,7 +6,7 @@
 /*   By: mnaqqad <mnaqqad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/27 12:46:48 by mnaqqad           #+#    #+#             */
-/*   Updated: 2021/11/28 10:46:29 by mnaqqad          ###   ########.fr       */
+/*   Updated: 2021/11/28 14:33:07 by mnaqqad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,11 +61,14 @@ static void	ft_next(char **buffer, char **sline, char **saver, int fd)
 	}
 	else
 	{
-		(*sline) = ft_substr((*saver), 0, ft_strchr((*saver), '\n') + 1);
+		(*sline) = ft_substr((*saver), 0, ft_strchr((*saver), '\n') +  1);
+		printf("\n sline:%s",(*sline));
+		printf("\n saver:%s",(*saver));
 		tmp = (*saver);
 		(*saver) = ft_strdup((*saver) + ft_strchr((*saver), '\n') + 1);
+		printf("\n dup :saver:%s\n",(*saver));
 		free(tmp);
-	 }
+	}
 	if (!(**sline))
 		ft_free(saver, sline);
 }
